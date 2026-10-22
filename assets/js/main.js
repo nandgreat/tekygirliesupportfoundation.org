@@ -575,9 +575,21 @@
     });
 
     /* magnificPopup video view */
-    $(".popup-video").magnificPopup({
-        type: "iframe",
-        mainClass: 'mfp-zoom-in', 
+    $(".popup-video").each(function () {
+        var h = $(this).attr('href') || '';
+        if (/\.mp4(\?.*)?$/i.test(h)) {
+            $(this).magnificPopup({
+                type: "inline",
+                items: { src: '<div class="tgsf-video-pop"><video controls autoplay playsinline src="' + h + '"></video></div>' },
+                mainClass: 'mfp-zoom-in',
+                removalDelay: 260,
+            });
+        } else {
+            $(this).magnificPopup({
+                type: "iframe",
+                mainClass: 'mfp-zoom-in',
+            });
+        }
     });
 
     /* magnificPopup video view */
